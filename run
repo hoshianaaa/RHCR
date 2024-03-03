@@ -1,0 +1,1 @@
+./lifelong -m maps/kiva.map -k 3 --scenario=KIVA --simulation_window=1 --solver=ECBS --suboptimal_bound=1.5 --dummy_path=1 --seed=0
