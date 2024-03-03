@@ -119,7 +119,7 @@ int main(int argc, char** argv)
 		        "the planner outputs plans with first planning_window timesteps collision-free")
 		("potential_function", po::value<string>()->default_value("NONE"), "potential function (NONE, SOC, IC)")
 		("potential_threshold", po::value<double>()->default_value(0), "potential threshold")
-		("rotation", po::value<bool>()->default_value(false), "consider rotation")
+		("rotation", po::value<bool>()->default_value(true), "consider rotation")
 		("robust", po::value<int>()->default_value(0), "k-robust (for now, only work for PBS)")
 		("CAT", po::value<bool>()->default_value(false), "use conflict-avoidance table")
 		// ("PG", po::value<bool>()->default_value(false),
