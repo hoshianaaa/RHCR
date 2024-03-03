@@ -43,7 +43,7 @@ void KivaSystem::initialize_start_locations()
 		int orientation = -1;
 		if (consider_rotation)
 		{
-			orientation = rand() % 4;
+			orientation = 0;
 		}
 		starts[k] = State(G.agent_home_locations[k], 0, orientation);
 		paths[k].emplace_back(starts[k]);
@@ -79,10 +79,10 @@ void KivaSystem::update_goal_locations()
 			int curr = paths[k][timestep].location; // current location
 			if (goal_locations[k].empty())
 			{
-				int next = G.endpoints[rand() % (int)G.endpoints.size()];
+        int next = G.endpoints[rand() % (int)G.endpoints.size()];
 				while (next == curr || held_endpoints.find(next) != held_endpoints.end())
 				{
-					next = G.endpoints[rand() % (int)G.endpoints.size()];
+          next = G.endpoints[rand() % (int)G.endpoints.size()];
 				}
 				goal_locations[k].emplace_back(next, 0);
 				held_endpoints.insert(next);

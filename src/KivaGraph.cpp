@@ -172,7 +172,7 @@ bool KivaGrid::load_unweighted_map(std::string fname)
 			}
 		}
 	}
-	shuffle(agent_home_locations.begin(), agent_home_locations.end(), std::default_random_engine());
+	//shuffle(agent_home_locations.begin(), agent_home_locations.end(), std::default_random_engine());
 	for (int i = 0; i < cols * rows; i++)
 	{
 		if (types[i] == "Obstacle")
