@@ -202,9 +202,15 @@ void KivaSystem::update_goal_locations()
           std::cout << "   [not empty] goal pos:" << goal.first << std::endl;
 				}
 				double min_timesteps = G.get_Manhattan_distance(goal.first, curr); // G.heuristics.at(goal)[curr];
+       std::cout << "   min_timesteps (goal to curr distance):" << min_timesteps << std::endl;
+       std::cout << "   simulation_window (=5):" << simulation_window << std::endl;
 				while (min_timesteps <= simulation_window)
 					// The agent might finish its tasks during the next planning horizon
 				{
+
+          std::cout << "    (min_timesteps <= simulation_window) : " << G.types[goal.first] << std::endl;
+          std::cout << "    => in while : " << G.types[goal.first] << std::endl;
+          std::cout << "     goal type : " << G.types[goal.first] << std::endl;
 					// assign a new task
 					pair<int, int> next;
 					if (G.types[goal.first] == "Endpoint")
@@ -212,7 +218,7 @@ void KivaSystem::update_goal_locations()
 						do
 						{
 							next = make_pair(G.endpoints[rand() % (int)G.endpoints.size()], 0);
-              std::cout << "    next pos:" << next.first << std::endl;
+              std::cout << "     next pos:" << next.first << std::endl;
 						} while (next == goal);
 					}
 					else

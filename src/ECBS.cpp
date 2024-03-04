@@ -42,6 +42,8 @@ void ECBS::update_paths(ECBSNode* curr)
         }
         curr = curr->parent;
     }
+
+    std::cout << "!!!====== update paths ======!!!" << std::endl;
 }
 
 
