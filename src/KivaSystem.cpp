@@ -169,6 +169,7 @@ void KivaSystem::update_goal_locations()
 			int curr = paths[k][timestep].location; // current location
 			if (useDummyPaths)
 			{
+        std::cout << " use dummy paths" << std::endl;
 				if (goal_locations[k].empty())
 				{
 					goal_locations[k].emplace_back(G.agent_home_locations[k], 0);
@@ -185,6 +186,7 @@ void KivaSystem::update_goal_locations()
 			}
 			else
 			{
+        std::cout << " not use dummy paths" << std::endl;
 				pair<int, int> goal; // The last goal location
 				if (goal_locations[k].empty())
 				{
