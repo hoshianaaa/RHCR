@@ -166,12 +166,15 @@ void KivaSystem::update_goal_locations()
     std::cout << "not hold endpoints" << std::endl;
 		for (int k = 0; k < num_of_drives; k++)
 		{
+
+      std::cout << "  agent[" << k << "]" << std::endl;
 			int curr = paths[k][timestep].location; // current location
 			if (useDummyPaths)
 			{
-        std::cout << " use dummy paths" << std::endl;
+        std::cout << "   use dummy paths" << std::endl;
 				if (goal_locations[k].empty())
 				{
+          std::cout << "   empty add home location" << std::endl;
 					goal_locations[k].emplace_back(G.agent_home_locations[k], 0);
 				}
 				if (goal_locations[k].size() == 1)
