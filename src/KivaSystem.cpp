@@ -31,6 +31,16 @@ void KivaSystem::initialize()
 			initialize_goal_locations();
 		}
 	}
+
+  std::cout << "====== KivaSystem (initialize) ======" << std::endl;
+  for (int i=0;i<goal_locations.size();i++)
+  {
+    for (int j=0;j<goal_locations[i].size();j++)
+    {
+      std::cout << "goal_locations[" << i << "]:" << goal_locations[i][j].first << ", " << goal_locations[i][j].second << std::endl;
+    }
+  }
+
 }
 
 void KivaSystem::initialize_start_locations()
@@ -63,16 +73,29 @@ void KivaSystem::initialize_goal_locations()
 		int goal = G.endpoints[rand() % (int)G.endpoints.size()];
 		goal_locations[k].emplace_back(goal, 0);
 	}
+
+  std::cout << "====== initialize_goal_locations ======" << std::endl;
+  for (int i=0;i<goal_locations.size();i++)
+  {
+    for (int j=0;j<goal_locations[i].size();j++)
+    {
+      std::cout << "goal_locations[" << i << "]:" << goal_locations[i][j].first << ", " << goal_locations[i][j].second << std::endl;
+    }
+  }
+
 }
 
 
 
 void KivaSystem::update_goal_locations()
 {
+  std::cout << "====== KivaSystem (update_goal_locations) ======" << std::endl;
+  
     if (!LRA_called)
         new_agents.clear();
 	if (hold_endpoints)
 	{
+    std::cout << " hold endpoints" << std::endl;
 		unordered_map<int, int> held_locations; // <location, agent id>
 		for (int k = 0; k < num_of_drives; k++)
 		{
@@ -140,6 +163,7 @@ void KivaSystem::update_goal_locations()
 	}
 	else
 	{
+    std::cout << " not hold endpoints" << std::endl;
 		for (int k = 0; k < num_of_drives; k++)
 		{
 			int curr = paths[k][timestep].location; // current location
@@ -196,6 +220,14 @@ void KivaSystem::update_goal_locations()
 			}
 		}
 	}
+
+  for (int i=0;i<goal_locations.size();i++)
+  {
+    for (int j=0;j<goal_locations[i].size();j++)
+    {
+      std::cout << "goal_locations[" << i << "]:" << goal_locations[i][j].first << ", " << goal_locations[i][j].second << std::endl;
+    }
+  }
 
 }
 
