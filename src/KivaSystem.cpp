@@ -163,7 +163,7 @@ void KivaSystem::update_goal_locations()
 	}
 	else
 	{
-    std::cout << "not hold endpoints" << std::endl;
+    std::cout << " not hold endpoints" << std::endl;
 		for (int k = 0; k < num_of_drives; k++)
 		{
 
@@ -189,15 +189,17 @@ void KivaSystem::update_goal_locations()
 			}
 			else
 			{
-        std::cout << " not use dummy paths" << std::endl;
+        std::cout << "  not use dummy paths" << std::endl;
 				pair<int, int> goal; // The last goal location
 				if (goal_locations[k].empty())
 				{
 					goal = make_pair(curr, 0);
+          std::cout << "   [empty] goal pos:" << goal.first << std::endl;
 				}
 				else
 				{
 					goal = goal_locations[k].back();
+          std::cout << "   [not empty] goal pos:" << goal.first << std::endl;
 				}
 				double min_timesteps = G.get_Manhattan_distance(goal.first, curr); // G.heuristics.at(goal)[curr];
 				while (min_timesteps <= simulation_window)
@@ -210,6 +212,7 @@ void KivaSystem::update_goal_locations()
 						do
 						{
 							next = make_pair(G.endpoints[rand() % (int)G.endpoints.size()], 0);
+              std::cout << "    next pos:" << next.first << std::endl;
 						} while (next == goal);
 					}
 					else
