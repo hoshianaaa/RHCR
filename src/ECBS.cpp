@@ -44,6 +44,7 @@ void ECBS::update_paths(ECBSNode* curr)
     }
 
     std::cout << "!!!====== update paths ======!!!" << std::endl;
+    print_paths();
 }
 
 
