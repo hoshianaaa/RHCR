@@ -95,7 +95,7 @@ void KivaSystem::update_goal_locations()
         new_agents.clear();
 	if (hold_endpoints)
 	{
-    std::cout << " hold endpoints" << std::endl;
+    std::cout << "hold endpoints" << std::endl;
 		unordered_map<int, int> held_locations; // <location, agent id>
 		for (int k = 0; k < num_of_drives; k++)
 		{
@@ -163,7 +163,7 @@ void KivaSystem::update_goal_locations()
 	}
 	else
 	{
-    std::cout << " not hold endpoints" << std::endl;
+    std::cout << "not hold endpoints" << std::endl;
 		for (int k = 0; k < num_of_drives; k++)
 		{
 			int curr = paths[k][timestep].location; // current location
