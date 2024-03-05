@@ -566,6 +566,7 @@ void BasicSystem::update_travel_times(unordered_map<int, double>& travel_times)
 
 void BasicSystem::solve()
 {
+ std::cout << "***** solve *****" << std::endl;
     LRA_called = false;
 	LRAStar lra(G, solver.path_planner);
 	lra.simulation_window = simulation_window;
@@ -597,12 +598,14 @@ void BasicSystem::solve()
 	}
 	 else // PBS or ECBS
 	 {
+    std::cout << "*PBS or ECBS" << std::endl;
 		 //PriorityGraph initial_priorities;
 		 update_initial_constraints(solver.initial_constraints);
 
 		 // solve
 		 if (hold_endpoints || useDummyPaths)
 		 {
+      std::cout << "*hold_endpoints or use DummyPaths" << std::endl;
 			 vector<State> new_starts;
 			 vector< vector<pair<int, int> > > new_goal_locations;
 			 for (int i : new_agents)
@@ -632,9 +635,25 @@ void BasicSystem::solve()
 			 {
 				 bool sol;
                 if (timestep == 0)
+                {
                     sol = solver.run(new_starts, new_goal_locations, 10 * time_limit);
+                                    }
                 else
+                {
                     sol = solver.run(new_starts, new_goal_locations, time_limit);
+                }
+                for (int i=0;i<new_starts.size();i++)
+                {
+                    std::cout << "new_starts[" << i << "]: " << new_starts[i].location << std::endl;
+                }
+                for (int i = 0; i < goal_locations.size(); ++i) {
+                  for (int j = 0; j < goal_locations[i].size(); ++j) {
+                      cout << "goal_locations[" << i << "][" << j << "] = ("
+                           << goal_locations[i][j].first << ", "
+                           << goal_locations[i][j].second << ")" << endl;
+                  }
+                }
+
                 if (sol)
 				 {
 					 auto pt = solver.solution.begin();
@@ -660,6 +679,7 @@ void BasicSystem::solve()
 		 }
 		 else
 		 {
+       std::cout << "*not (hold_endpoints or use DummyPaths)" << std::endl;
 			 bool sol = solver.run(starts, goal_locations, time_limit);
 			 if (sol)
 			 {
