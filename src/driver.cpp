@@ -130,7 +130,7 @@ int main(int argc, char** argv)
 				"Find dummy paths from Liu et al, AAMAS 2019")
 		("prioritize_start", po::value<bool>()->default_value(true), "Prioritize waiting at start locations")
 		("suboptimal_bound", po::value<double>()->default_value(1), "Suboptimal bound for ECBS")
-		("log", po::value<bool>()->default_value(false), "save the search trees (and the priority trees)")
+		("log", po::value<bool>()->default_value(true), "save the search trees (and the priority trees)")
 		;
 	clock_t start_time = clock();
 	po::variables_map vm;

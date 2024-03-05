@@ -566,7 +566,10 @@ void BasicSystem::update_travel_times(unordered_map<int, double>& travel_times)
 
 void BasicSystem::solve()
 {
+ std::cout << std::endl;
+ std::cout << "=================" << std::endl;
  std::cout << "***** solve *****" << std::endl;
+ std::cout << "=================" << std::endl;
     LRA_called = false;
 	LRAStar lra(G, solver.path_planner);
 	lra.simulation_window = simulation_window;
