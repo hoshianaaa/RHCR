@@ -256,7 +256,7 @@ void KivaSystem::simulate(int simulation_time)
 	{
 		std::cout << std::endl;
 		std::cout << "===========================================" << std::endl;
-		std::cout << "==========   Timestep : " << timestep << "     ============" << std::endl;
+		std::cout << "==========    Timestep : " << timestep << "     ============" << std::endl;
 		std::cout << "============================================" << std::endl;
 
 		update_start_locations();
