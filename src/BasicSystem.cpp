@@ -601,14 +601,14 @@ void BasicSystem::solve()
 	}
 	 else // PBS or ECBS
 	 {
-    std::cout << "*PBS or ECBS" << std::endl;
+     std::cout << "*PBS or ECBS" << std::endl;
 		 //PriorityGraph initial_priorities;
 		 update_initial_constraints(solver.initial_constraints);
 
 		 // solve
 		 if (hold_endpoints || useDummyPaths)
 		 {
-      std::cout << "*hold_endpoints or use DummyPaths" << std::endl;
+       std::cout << "*hold_endpoints or use DummyPaths" << std::endl;
 			 vector<State> new_starts;
 			 vector< vector<pair<int, int> > > new_goal_locations;
 			 for (int i : new_agents)
@@ -636,7 +636,7 @@ void BasicSystem::solve()
 			 }
 			 if (!new_agents.empty())
 			 {
-				 bool sol;
+				        bool sol;
                 if (timestep == 0)
                 {
                     sol = solver.run(new_starts, new_goal_locations, 10 * time_limit);
@@ -683,15 +683,30 @@ void BasicSystem::solve()
 		 else
 		 {
        std::cout << "*not (hold_endpoints or use DummyPaths)" << std::endl;
+
+       for (int i=0;i<starts.size();i++)
+       {
+           std::cout << "*starts[" << i << "]: " << starts[i].location << std::endl;
+       }
+       for (int i = 0; i < goal_locations.size(); ++i) {
+         for (int j = 0; j < goal_locations[i].size(); ++j) {
+             cout << "*goal_locations[" << i << "][" << j << "] = ("
+                  << goal_locations[i][j].first << ", "
+                  << goal_locations[i][j].second << ")" << endl;
+         }
+       }
+
 			 bool sol = solver.run(starts, goal_locations, time_limit);
 			 if (sol)
 			 {
+        std::cout << "*sol" << std::endl;
 				 if (log)
 					 solver.save_constraints_in_goal_node(outfile + "/goal_nodes/" + std::to_string(timestep) + ".gv");
 				 update_paths(solver.solution);
 			 }
 			 else
 			 {
+         std::cout << "*not sol" << std::endl;
 				 lra.resolve_conflicts(solver.solution);
 				 update_paths(lra.solution);
 			 }
@@ -707,16 +722,16 @@ void BasicSystem::solve()
 bool BasicSystem::solve_by_WHCA(vector<Path>& planned_paths,
 	const vector<State>& new_starts, const vector< vector<pair<int, int> > >& new_goal_locations)
 {
-	WHCAStar whca(G, solver.path_planner);
+    WHCAStar whca(G, solver.path_planner);
     whca.k_robust = k_robust;
     whca.window = INT_MAX;
     whca.hold_endpoints = hold_endpoints || useDummyPaths;
     whca.screen = screen;
-	whca.initial_rt.hold_endpoints = true;
-	whca.initial_rt.map_size = G.size();
-	whca.initial_rt.k_robust = k_robust;
-	whca.initial_rt.window = INT_MAX;
-	whca.initial_rt.copy(solver.initial_rt);
+    whca.initial_rt.hold_endpoints = true;
+    whca.initial_rt.map_size = G.size();
+    whca.initial_rt.k_robust = k_robust;
+    whca.initial_rt.window = INT_MAX;
+    whca.initial_rt.copy(solver.initial_rt);
     whca.initial_solution.resize(new_starts.size());
     if (whca.hold_endpoints)
     {

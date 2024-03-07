@@ -6,21 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/dev/RHCR/src/driver.cpp
+/home/dev/RHCR/src/KivaSystem.cpp
 KivaSystem.h
 /home/dev/RHCR/src/KivaSystem.h
-SortingSystem.h
-/home/dev/RHCR/src/SortingSystem.h
-OnlineSystem.h
-/home/dev/RHCR/src/OnlineSystem.h
-BeeSystem.h
-/home/dev/RHCR/src/BeeSystem.h
-ID.h
-/home/dev/RHCR/src/ID.h
-boost/program_options.hpp
--
-boost/filesystem.hpp
--
+WHCAStar.h
+/home/dev/RHCR/src/WHCAStar.h
+ECBS.h
+/home/dev/RHCR/src/ECBS.h
+LRAStar.h
+/home/dev/RHCR/src/LRAStar.h
+PBS.h
+/home/dev/RHCR/src/PBS.h
 
 inc/BasicGraph.h
 common.h
@@ -44,16 +40,6 @@ inc/ECBS.h
 LRAStar.h
 inc/LRAStar.h
 
-inc/BeeGraph.h
-BasicGraph.h
-inc/BasicGraph.h
-
-inc/BeeSystem.h
-BasicSystem.h
-inc/BasicSystem.h
-BeeGraph.h
-inc/BeeGraph.h
-
 inc/ECBS.h
 ECBSNode.h
 inc/ECBSNode.h
@@ -67,10 +53,6 @@ common.h
 inc/common.h
 States.h
 inc/States.h
-
-inc/ID.h
-MAPFSolver.h
-inc/MAPFSolver.h
 
 inc/KivaGraph.h
 BasicGraph.h
@@ -93,16 +75,6 @@ SIPP.h
 inc/SIPP.h
 ctime
 -
-
-inc/OnlineGraph.h
-BasicGraph.h
-inc/BasicGraph.h
-
-inc/OnlineSystem.h
-BasicSystem.h
-inc/BasicSystem.h
-OnlineGraph.h
-inc/OnlineGraph.h
 
 inc/PBS.h
 PBSNode.h
@@ -145,16 +117,6 @@ BasicGraph.h
 inc/BasicGraph.h
 ReservationTable.h
 inc/ReservationTable.h
-
-inc/SortingGraph.h
-BasicGraph.h
-inc/BasicGraph.h
-
-inc/SortingSystem.h
-BasicSystem.h
-inc/BasicSystem.h
-SortingGraph.h
-inc/SortingGraph.h
 
 inc/StateTimeAStar.h
 SingleAgentSolver.h
