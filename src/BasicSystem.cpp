@@ -766,6 +766,20 @@ void BasicSystem::solve()
              }
 
              bool sol = solver.run(starts, goal_locations, time_limit);
+
+             if (sol)
+             {
+               for (int i=0;i<solver.solution.size();i++)
+               {
+                 auto path = solver.solution[i];
+                 std::cout << "agent[" << i << "]" << std::endl;
+                 for (auto state : path)
+                 {
+                    std::cout << "location:" << state.location;
+                    std::cout << ", orientation:" << state.orientation << std::endl;
+                 }
+               }
+             }
              g_run = false;
            }
 
