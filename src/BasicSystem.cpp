@@ -724,8 +724,8 @@ void BasicSystem::solve()
 
         // 4. 指定された値を設定
         goal_locations[0][0] = std::make_pair(46, 3);
-        goal_locations[1][0] = std::make_pair(20, 1);
-        goal_locations[2][0] = std::make_pair(16, 2);
+        goal_locations[1][0] = std::make_pair(24, 1);
+        goal_locations[2][0] = std::make_pair(25, 2);
 
        for (int i=0;i<starts.size();i++)
        {
