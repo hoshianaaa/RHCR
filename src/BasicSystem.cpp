@@ -720,7 +720,7 @@ void BasicSystem::solve()
             inner_vector.resize(1);
         }
         // 4. 指定された値を設定
-        goal_locations[0][0] = std::make_pair(19, 3);
+        goal_locations[0][0] = std::make_pair(16, 3);
         goal_locations[1][0] = std::make_pair(20, 1);
         goal_locations[2][0] = std::make_pair(21, 2);
 
