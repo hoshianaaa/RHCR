@@ -554,6 +554,7 @@ bool ECBS::run(const std::vector<State>& starts,
         return false;
 
     // start the loop
+    int count = 0;
     while (!open_list.empty() && !solution_found)
     {
         runtime = (std::clock() - start) * 1.0  / CLOCKS_PER_SEC;
@@ -565,7 +566,9 @@ bool ECBS::run(const std::vector<State>& starts,
         }
 
         ECBSNode* curr = pop_node();
+        std::cout << "ECBS/run update_paths count:" << count << std::endl;
         update_paths(curr);
+        count++;
 
 		if (window > curr->window)
 		{
