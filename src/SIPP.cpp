@@ -58,17 +58,20 @@ Path SIPP::run(const BasicGraph& G, const State& start,
                const vector<pair<int, int> >& goal_location,
                ReservationTable& rt)
 {
+    std::cout << "  *SIPP:" << std::endl; 
     num_expanded = 0;
     num_generated = 0;
     runtime = 0;
     clock_t t = std::clock();
-	double h_val = compute_h_value(G, start.location, 0, goal_location);
+	  double h_val = compute_h_value(G, start.location, 0, goal_location);
+    std::cout << "  *SIPP2:" << std::endl; 
 	if (h_val > INT_MAX)
 	{
 		cout << "The start and goal locations are disconnected!" << endl;
 		return Path();
 	}
     Interval interval = rt.getFirstSafeInterval(start.location);
+    std::cout << "  *SIPP3:" << std::endl; 
 	
     if (std::get<0>(interval) == 0)
     {
@@ -96,8 +99,9 @@ Path SIPP::run(const BasicGraph& G, const State& start,
         focal_bound = min_f_val;
         node->focal_handle = focal_list.push(node);
     }
-	int earliest_holding_time = 0;
-	if (hold_endpoints)
+    std::cout << "  *SIPP4:" << std::endl; 
+	  int earliest_holding_time = 0;
+	  if (hold_endpoints)
 		earliest_holding_time = rt.getHoldingTimeFromSIT(goal_location.back().first);
     while (!focal_list.empty())
     {

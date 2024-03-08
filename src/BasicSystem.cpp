@@ -703,13 +703,13 @@ void BasicSystem::solve()
         // change start and goal !!!
        /* スタート位置を変えてみる + clear*/
         solver.clear();
-        starts[0].location = 21;
+        starts[0].location = 15;
         starts[0].orientation = 3;
 
-        starts[1].location = 11;
+        starts[1].location = 30;
         starts[1].orientation = 3;
 
-        starts[2].location = 46;
+        starts[2].location = 45;
         starts[2].orientation = 2;
 
         // 1. goal_locationsをクリア
@@ -723,9 +723,9 @@ void BasicSystem::solve()
         goal_locations[2].resize(1);
 
         // 4. 指定された値を設定
-        goal_locations[0][0] = std::make_pair(21, 3);
-        goal_locations[1][0] = std::make_pair(19, 1);
-        goal_locations[2][0] = std::make_pair(22, 2);
+        goal_locations[0][0] = std::make_pair(46, 3);
+        goal_locations[1][0] = std::make_pair(20, 1);
+        goal_locations[2][0] = std::make_pair(16, 2);
 
        for (int i=0;i<starts.size();i++)
        {

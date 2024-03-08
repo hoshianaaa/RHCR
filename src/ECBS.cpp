@@ -448,6 +448,8 @@ bool ECBS::generate_root_node()
         std::cout << "Generate root CT node ..." << std::endl;
 
 
+    std::cout << "ECBS::generate_root_node" << std::endl;
+
     for (int i = 0; i < num_of_agents; i++)
     {
 		rt.copy(initial_rt);
@@ -459,6 +461,7 @@ bool ECBS::generate_root_node()
 			Path path = path_planner.run(G, starts[i], goal_locations[i], rt);
 		}*/
 
+    std::cout << "ECBS::generate_root_node 2 :" << i << std::endl;
 		if (path.empty())
 		{
 			std::cout << "NO SOLUTION EXISTS";
@@ -524,6 +527,8 @@ bool ECBS::run(const std::vector<State>& starts,
                      const std::vector< vector<pair<int, int> > >& goal_locations,
                      int time_limit)
 {
+
+    std::cout << "ECBS::run" << std::endl;
     clear();
 
     // set timer
@@ -550,8 +555,10 @@ bool ECBS::run(const std::vector<State>& starts,
     rt.prioritize_start = false;
     path_planner.travel_times.clear();
 
+    std::cout << "ECBS::run 2" << std::endl;
     if (!generate_root_node())
         return false;
+    std::cout << "ECBS::run 3" << std::endl;
 
     // start the loop
     int count = 0;
