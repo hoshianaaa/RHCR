@@ -17,6 +17,8 @@ ros/ros.h
 -
 std_msgs/String.h
 -
+nlohmann/json.hpp
+-
 
 /opt/ros/noetic/include/ros/advertise_options.h
 ros/forwards.h

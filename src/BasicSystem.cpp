@@ -3,7 +3,7 @@
 #include <boost/tokenizer.hpp>
 #include <ros/ros.h>
 #include <std_msgs/String.h>
-
+#include <nlohmann/json.hpp>
 
 BasicSystem::BasicSystem(const BasicGraph& G, MAPFSolver& solver): G(G), solver(solver), num_of_tasks(0) {}
 
@@ -565,14 +565,46 @@ void BasicSystem::update_travel_times(unordered_map<int, double>& travel_times)
     }
 }
 
+using json = nlohmann::json;
+
 bool g_run = 0;
-std::string g_message = "";
+json g_message = "";
 
 void stringCallback(const std_msgs::String::ConstPtr& msg)
 {
-    ROS_INFO("Received: [%s]", msg->data.c_str());
+
+  std::cout << "callback" << std::endl;
+
+    try
+    {
+        // 受信した文字列メッセージをJSONオブジェクトにパース
+        g_message = json::parse(msg->data);
+
+        // パースしたデータをログ出力（例：スタート位置の一覧）
+        for (const auto& start : g_message["starts"])
+        {
+            ROS_INFO("Start: [%d, %d]", start[0].get<int>(), start[1].get<int>());
+        }
+        for (const auto& goal : g_message["goal_locations"])
+        {
+            ROS_INFO("Goal: [%d, %d]", goal[0].get<int>(), goal[1].get<int>());
+        }
+
+
+
+        // ゴール位置についても同様に処理可能
+        // ここに追加の処理を記述
+    }
+    catch (json::parse_error& e)
+    {
+        ROS_ERROR("Parsing error: %s", e.what());
+    }
+    catch (json::type_error& e)
+    {
+        ROS_ERROR("Type error: %s", e.what());
+    }
+
     g_run = true;
-    g_message = msg->data.c_str();
 }
 
 void BasicSystem::solve()
@@ -717,7 +749,7 @@ void BasicSystem::solve()
         ros::NodeHandle nh;
 
         // サブスクライバーの設定。トピック名 "chatter" からのメッセージを受信するように設定します。
-        ros::Subscriber sub = nh.subscribe("chatter", 1000, stringCallback);
+        ros::Subscriber sub = nh.subscribe("target", 1, stringCallback);
 
         ros::Rate loop_rate(10);
 
@@ -728,15 +760,15 @@ void BasicSystem::solve()
             {
               // change start and goal !!!
               /* スタート位置を変えてみる + clear*/
+              auto msg_starts = g_message["starts"];
               solver.clear();
-              starts[0].location = 7;
-              starts[0].orientation = 3;
 
-              starts[1].location = 8;
-              starts[1].orientation = 3;
-
-              starts[2].location = 9;
-              starts[2].orientation = 2;
+              starts[0].location = msg_starts[0][0].get<int>();
+              starts[0].orientation = msg_starts[0][1].get<int>();
+              starts[1].location = msg_starts[1][0].get<int>();
+              starts[1].orientation = msg_starts[1][1].get<int>();
+              starts[2].location = msg_starts[2][0].get<int>();
+              starts[2].orientation = msg_starts[2][1].get<int>();
 
               // 1. goal_locationsをクリア
               goal_locations.clear();
@@ -744,14 +776,17 @@ void BasicSystem::solve()
               goal_locations.resize(3);
               //goal_locations.resize(2);
               // 3. 各内部ベクトルに1つの要素を追加
+
+              auto msg_goals = g_message["goal_locations"];
+
               goal_locations[0].resize(1);
               goal_locations[1].resize(1);
               goal_locations[2].resize(1);
 
               // 4. 指定された値を設定
-              goal_locations[0][0] = std::make_pair(30, 3);
-              goal_locations[1][0] = std::make_pair(23, 1);
-              goal_locations[2][0] = std::make_pair(25, 2);
+              goal_locations[0][0] = std::make_pair(msg_goals[0][0].get<int>(), msg_goals[0][1].get<int>());
+              goal_locations[1][0] = std::make_pair(msg_goals[1][0].get<int>(), msg_goals[1][1].get<int>());
+              goal_locations[2][0] = std::make_pair(msg_goals[2][0].get<int>(), msg_goals[2][1].get<int>());
 
              for (int i=0;i<starts.size();i++)
              {
@@ -776,7 +811,8 @@ void BasicSystem::solve()
                  for (auto state : path)
                  {
                     std::cout << "location:" << state.location;
-                    std::cout << ", orientation:" << state.orientation << std::endl;
+                    std::cout << ", orientation:" << state.orientation;
+                    std::cout << ", timestep:" << state.timestep << std::endl;
                  }
                }
              }
