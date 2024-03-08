@@ -702,9 +702,14 @@ void BasicSystem::solve()
         // change start and goal !!!
        /* スタート位置を変えてみる + clear*/
         solver.clear();
-        starts[0].location = 0;
-        starts[1].location = 1;
-        starts[2].location = 2;
+        starts[0].location = 10;
+        starts[0].orientation = 0;
+
+        starts[1].location = 11;
+        starts[1].orientation = 3;
+
+        starts[2].location = 12;
+        starts[2].orientation = 2;
 
         // 1. goal_locationsをクリア
         goal_locations.clear();
