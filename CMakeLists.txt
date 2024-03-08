@@ -17,6 +17,12 @@ file(GLOB SOURCES "src/*.cpp")
 find_package( Boost 1.49.0 REQUIRED COMPONENTS program_options system filesystem)
 include_directories( ${Boost_INCLUDE_DIRS} )
 
+# ROS化 https://qiita.com/hoshianaaa/items/f512e11cb9ba262ea60a
+find_package(roscpp)
+
+include_directories(
+  ${roscpp_INCLUDE_DIRS}
+)
 
 add_executable(lifelong ${SOURCES} )
-target_link_libraries(lifelong ${Boost_LIBRARIES})
+target_link_libraries(lifelong ${Boost_LIBRARIES} ${roscpp_LIBRARIES})

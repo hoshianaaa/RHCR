@@ -233,11 +233,44 @@ boost_program_options_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_program_opt
 //The directory containing a CMake configuration file for boost_system.
 boost_system_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_system-1.71.0
 
+//No help, variable specified on the command line.
+cpp_common_DIR:UNINITIALIZED=/opt/ros/noetic/share/cpp_common/cmake
+
+//Path to a library.
+lib:FILEPATH=/opt/ros/noetic/lib/libxmlrpcpp.so
+
 //Value Computed by CMake
 lifelong_BINARY_DIR:STATIC=/home/dev/RHCR
 
 //Value Computed by CMake
 lifelong_SOURCE_DIR:STATIC=/home/dev/RHCR
+
+//No help, variable specified on the command line.
+message_runtime_DIR:UNINITIALIZED=/opt/ros/noetic/share/message_runtime/cmake
+
+//No help, variable specified on the command line.
+rosconsole_DIR:UNINITIALIZED=/opt/ros/noetic/share/rosconsole/cmake
+
+//No help, variable specified on the command line.
+roscpp_DIR:UNINITIALIZED=/opt/ros/noetic/share/roscpp/cmake
+
+//No help, variable specified on the command line.
+roscpp_serialization_DIR:UNINITIALIZED=/opt/ros/noetic/share/roscpp_serialization/cmake
+
+//No help, variable specified on the command line.
+roscpp_traits_DIR:UNINITIALIZED=/opt/ros/noetic/share/roscpp_traits/cmake
+
+//No help, variable specified on the command line.
+rosgraph_msgs_DIR:UNINITIALIZED=/opt/ros/noetic/share/rosgraph_msgs/cmake
+
+//No help, variable specified on the command line.
+rostime_DIR:UNINITIALIZED=/opt/ros/noetic/share/rostime/cmake
+
+//No help, variable specified on the command line.
+std_msgs_DIR:UNINITIALIZED=/opt/ros/noetic/share/std_msgs/cmake
+
+//No help, variable specified on the command line.
+xmlrpcpp_DIR:UNINITIALIZED=/opt/ros/noetic/share/xmlrpcpp/cmake
 
 
 ########################

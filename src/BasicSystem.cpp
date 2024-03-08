@@ -1,6 +1,7 @@
 #include "BasicSystem.h"
 #include <stdlib.h>
 #include <boost/tokenizer.hpp>
+#include <ros/ros.h>
 
 
 BasicSystem::BasicSystem(const BasicGraph& G, MAPFSolver& solver): G(G), solver(solver), num_of_tasks(0) {}
@@ -702,27 +703,29 @@ void BasicSystem::solve()
         // change start and goal !!!
        /* スタート位置を変えてみる + clear*/
         solver.clear();
-        starts[0].location = 10;
-        starts[0].orientation = 0;
+        starts[0].location = 21;
+        starts[0].orientation = 3;
 
         starts[1].location = 11;
         starts[1].orientation = 3;
 
-        starts[2].location = 12;
+        starts[2].location = 46;
         starts[2].orientation = 2;
 
         // 1. goal_locationsをクリア
         goal_locations.clear();
         // 2. 3つの内部ベクトルを持つようにgoal_locationsを再初期化
         goal_locations.resize(3);
+        //goal_locations.resize(2);
         // 3. 各内部ベクトルに1つの要素を追加
-        for (auto& inner_vector : goal_locations) {
-            inner_vector.resize(1);
-        }
+        goal_locations[0].resize(1);
+        goal_locations[1].resize(1);
+        goal_locations[2].resize(1);
+
         // 4. 指定された値を設定
-        goal_locations[0][0] = std::make_pair(16, 3);
-        goal_locations[1][0] = std::make_pair(20, 1);
-        goal_locations[2][0] = std::make_pair(21, 2);
+        goal_locations[0][0] = std::make_pair(21, 3);
+        goal_locations[1][0] = std::make_pair(19, 1);
+        goal_locations[2][0] = std::make_pair(22, 2);
 
        for (int i=0;i<starts.size();i++)
        {

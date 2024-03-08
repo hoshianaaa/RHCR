@@ -472,6 +472,23 @@ lifelong: CMakeFiles/lifelong.dir/build.make
 lifelong: /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.71.0
 lifelong: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
 lifelong: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+lifelong: /opt/ros/noetic/lib/libroscpp.so
+lifelong: /usr/lib/x86_64-linux-gnu/libpthread.so
+lifelong: /usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.71.0
+lifelong: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.71.0
+lifelong: /opt/ros/noetic/lib/librosconsole.so
+lifelong: /opt/ros/noetic/lib/librosconsole_log4cxx.so
+lifelong: /opt/ros/noetic/lib/librosconsole_backend_interface.so
+lifelong: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+lifelong: /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.71.0
+lifelong: /opt/ros/noetic/lib/libroscpp_serialization.so
+lifelong: /opt/ros/noetic/lib/libxmlrpcpp.so
+lifelong: /opt/ros/noetic/lib/librostime.so
+lifelong: /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.71.0
+lifelong: /opt/ros/noetic/lib/libcpp_common.so
+lifelong: /usr/lib/x86_64-linux-gnu/libboost_system.so.1.71.0
+lifelong: /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.71.0
+lifelong: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
 lifelong: CMakeFiles/lifelong.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dev/RHCR/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Linking CXX executable lifelong"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lifelong.dir/link.txt --verbose=$(VERBOSE)
