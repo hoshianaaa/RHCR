@@ -6,17 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/dev/RHCR/src/KivaSystem.cpp
-KivaSystem.h
-/home/dev/RHCR/src/KivaSystem.h
-WHCAStar.h
-/home/dev/RHCR/src/WHCAStar.h
-ECBS.h
-/home/dev/RHCR/src/ECBS.h
-LRAStar.h
-/home/dev/RHCR/src/LRAStar.h
-PBS.h
-/home/dev/RHCR/src/PBS.h
+/home/dev/RHCR/src/BasicSystem.cpp
+BasicSystem.h
+/home/dev/RHCR/src/BasicSystem.h
+stdlib.h
+-
+boost/tokenizer.hpp
+-
 
 inc/BasicGraph.h
 common.h
@@ -53,16 +49,6 @@ common.h
 inc/common.h
 States.h
 inc/States.h
-
-inc/KivaGraph.h
-BasicGraph.h
-inc/BasicGraph.h
-
-inc/KivaSystem.h
-BasicSystem.h
-inc/BasicSystem.h
-KivaGraph.h
-inc/KivaGraph.h
 
 inc/LRAStar.h
 MAPFSolver.h

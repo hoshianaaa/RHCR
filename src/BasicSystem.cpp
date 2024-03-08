@@ -603,7 +603,22 @@ void BasicSystem::solve()
 	 {
      std::cout << "*PBS or ECBS" << std::endl;
 		 //PriorityGraph initial_priorities;
+     std::cout << "*before update_constraints" << std::endl;
+     /* initial constraintsの中身を見てみる */
+     for (auto con : solver.initial_constraints)
+     {
+        auto [agent, loc, t] = con;
+        std::cout << " *agent:" << agent << ", loc:" << loc << ", t:" << t << std::endl;   
+     }
+
 		 update_initial_constraints(solver.initial_constraints);
+
+     std::cout << "*after update_constraints" << std::endl;
+     for (auto con : solver.initial_constraints)
+     {
+        auto [agent, loc, t] = con;
+        std::cout << " *agent:" << agent << ", loc:" << loc << ", t:" << t << std::endl;   
+     }
 
 		 // solve
 		 if (hold_endpoints || useDummyPaths)
@@ -683,6 +698,13 @@ void BasicSystem::solve()
 		 else
 		 {
        std::cout << "*not (hold_endpoints or use DummyPaths)" << std::endl;
+
+       /* スタート位置を変えてみる*/
+       /*
+       starts[0].location = 0;
+       starts[1].location = 1;
+       starts[2].location = 2;
+       */
 
        for (int i=0;i<starts.size();i++)
        {

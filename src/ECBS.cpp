@@ -45,6 +45,10 @@ void ECBS::update_paths(ECBSNode* curr)
 
     std::cout << "!!!====== update paths ======!!!" << std::endl;
     print_paths();
+    if (curr != nullptr) // currがnullでないことを確認
+    {
+        print_conflicts(*curr); // currの指すオブジェクトをデリファレンスして参照を渡す
+    }
 }
 
 
