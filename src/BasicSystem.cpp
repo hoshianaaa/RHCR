@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <boost/tokenizer.hpp>
 #include <ros/ros.h>
+#include <std_msgs/String.h>
 
 
 BasicSystem::BasicSystem(const BasicGraph& G, MAPFSolver& solver): G(G), solver(solver), num_of_tasks(0) {}
@@ -564,6 +565,15 @@ void BasicSystem::update_travel_times(unordered_map<int, double>& travel_times)
     }
 }
 
+bool g_run = 0;
+std::string g_message = "";
+
+void stringCallback(const std_msgs::String::ConstPtr& msg)
+{
+    ROS_INFO("Received: [%s]", msg->data.c_str());
+    g_run = true;
+    g_message = msg->data.c_str();
+}
 
 void BasicSystem::solve()
 {
@@ -700,46 +710,71 @@ void BasicSystem::solve()
 		 {
        std::cout << "*not (hold_endpoints or use DummyPaths)" << std::endl;
 
-        // change start and goal !!!
-       /* スタート位置を変えてみる + clear*/
-        solver.clear();
-        starts[0].location = 15;
-        starts[0].orientation = 3;
+        // ROSノードの初期化
+        int fake_argc = 0;
+        char** fake_argv = nullptr;
+        ros::init(fake_argc, fake_argv, "string_listener");
+        ros::NodeHandle nh;
 
-        starts[1].location = 30;
-        starts[1].orientation = 3;
+        // サブスクライバーの設定。トピック名 "chatter" からのメッセージを受信するように設定します。
+        ros::Subscriber sub = nh.subscribe("chatter", 1000, stringCallback);
 
-        starts[2].location = 45;
-        starts[2].orientation = 2;
+        ros::Rate loop_rate(10);
 
-        // 1. goal_locationsをクリア
-        goal_locations.clear();
-        // 2. 3つの内部ベクトルを持つようにgoal_locationsを再初期化
-        goal_locations.resize(3);
-        //goal_locations.resize(2);
-        // 3. 各内部ベクトルに1つの要素を追加
-        goal_locations[0].resize(1);
-        goal_locations[1].resize(1);
-        goal_locations[2].resize(1);
+        while (ros::ok())
+        {
 
-        // 4. 指定された値を設定
-        goal_locations[0][0] = std::make_pair(46, 3);
-        goal_locations[1][0] = std::make_pair(24, 1);
-        goal_locations[2][0] = std::make_pair(25, 2);
+            if (g_run == true)
+            {
+              // change start and goal !!!
+              /* スタート位置を変えてみる + clear*/
+              solver.clear();
+              starts[0].location = 7;
+              starts[0].orientation = 3;
 
-       for (int i=0;i<starts.size();i++)
-       {
-           std::cout << "*starts[" << i << "]: " << starts[i].location << std::endl;
-       }
-       for (int i = 0; i < goal_locations.size(); ++i) {
-         for (int j = 0; j < goal_locations[i].size(); ++j) {
-             cout << "*goal_locations[" << i << "][" << j << "] = ("
-                  << goal_locations[i][j].first << ", "
-                  << goal_locations[i][j].second << ")" << endl;
-         }
-       }
+              starts[1].location = 8;
+              starts[1].orientation = 3;
 
-			 bool sol = solver.run(starts, goal_locations, time_limit);
+              starts[2].location = 9;
+              starts[2].orientation = 2;
+
+              // 1. goal_locationsをクリア
+              goal_locations.clear();
+              // 2. 3つの内部ベクトルを持つようにgoal_locationsを再初期化
+              goal_locations.resize(3);
+              //goal_locations.resize(2);
+              // 3. 各内部ベクトルに1つの要素を追加
+              goal_locations[0].resize(1);
+              goal_locations[1].resize(1);
+              goal_locations[2].resize(1);
+
+              // 4. 指定された値を設定
+              goal_locations[0][0] = std::make_pair(30, 3);
+              goal_locations[1][0] = std::make_pair(23, 1);
+              goal_locations[2][0] = std::make_pair(25, 2);
+
+             for (int i=0;i<starts.size();i++)
+             {
+                 std::cout << "*starts[" << i << "]: " << starts[i].location << std::endl;
+             }
+             for (int i = 0; i < goal_locations.size(); ++i) {
+               for (int j = 0; j < goal_locations[i].size(); ++j) {
+                   cout << "*goal_locations[" << i << "][" << j << "] = ("
+                        << goal_locations[i][j].first << ", "
+                        << goal_locations[i][j].second << ")" << endl;
+               }
+             }
+
+             bool sol = solver.run(starts, goal_locations, time_limit);
+             g_run = false;
+           }
+
+           ros::spinOnce();
+           loop_rate.sleep();
+
+        }
+
+        /*
 			 if (sol)
 			 {
         std::cout << "*sol" << std::endl;
@@ -753,6 +788,7 @@ void BasicSystem::solve()
 				 lra.resolve_conflicts(solver.solution);
 				 update_paths(lra.solution);
 			 }
+       */
 		 }
 		 if (log)
 			 solver.save_search_tree(outfile + "/search_trees/" + std::to_string(timestep) + ".gv");
