@@ -699,11 +699,25 @@ void BasicSystem::solve()
 		 {
        std::cout << "*not (hold_endpoints or use DummyPaths)" << std::endl;
 
+        // change start and goal !!!
        /* スタート位置を変えてみる + clear*/
-       solver.clear();
-       starts[0].location = 0;
-       starts[1].location = 1;
-       starts[2].location = 2;
+        solver.clear();
+        starts[0].location = 0;
+        starts[1].location = 1;
+        starts[2].location = 2;
+
+        // 1. goal_locationsをクリア
+        goal_locations.clear();
+        // 2. 3つの内部ベクトルを持つようにgoal_locationsを再初期化
+        goal_locations.resize(3);
+        // 3. 各内部ベクトルに1つの要素を追加
+        for (auto& inner_vector : goal_locations) {
+            inner_vector.resize(1);
+        }
+        // 4. 指定された値を設定
+        goal_locations[0][0] = std::make_pair(19, 3);
+        goal_locations[1][0] = std::make_pair(20, 1);
+        goal_locations[2][0] = std::make_pair(21, 2);
 
        for (int i=0;i<starts.size();i++)
        {

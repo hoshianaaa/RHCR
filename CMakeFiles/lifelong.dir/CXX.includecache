@@ -14,10 +14,6 @@ stdlib.h
 boost/tokenizer.hpp
 -
 
-/home/dev/RHCR/src/ECBS.cpp
-ECBS.h
-/home/dev/RHCR/src/ECBS.h
-
 inc/BasicGraph.h
 common.h
 inc/common.h
