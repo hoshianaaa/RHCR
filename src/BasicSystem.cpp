@@ -565,6 +565,7 @@ void BasicSystem::update_travel_times(unordered_map<int, double>& travel_times)
     }
 }
 
+// --------------------- 追加した処理 ここから -------------------------
 using json = nlohmann::json;
 
 bool g_run = 0;
@@ -606,6 +607,21 @@ void stringCallback(const std_msgs::String::ConstPtr& msg)
 
     g_run = true;
 }
+
+// State 構造体を JSON に変換するための関数
+void to_json(json& j, const State& s) {
+    j = json{{"location", s.location}, {"timestep", s.timestep}, {"orientation", s.orientation}};
+}
+
+// std::vector<Path> 型を JSON に変換するための関数
+void to_json(json& j, const Path& p) {
+    for (const auto& s : p) {
+        j.push_back(s);
+    }
+}
+// ------------------ 追加した処理 ここまで ----------------------
+
+
 
 void BasicSystem::solve()
 {
@@ -750,6 +766,7 @@ void BasicSystem::solve()
 
         // サブスクライバーの設定。トピック名 "chatter" からのメッセージを受信するように設定します。
         ros::Subscriber sub = nh.subscribe("target", 1, stringCallback);
+        ros::Publisher pub = nh.advertise<std_msgs::String>("calc_path", 1000);
 
         ros::Rate loop_rate(10);
 
@@ -816,6 +833,13 @@ void BasicSystem::solve()
                  }
                }
              }
+
+             json j = solver.solution;
+             std::cout << j.dump(2) << std::endl;
+             std_msgs::String pub_msg;
+             pub_msg.data = j.dump(2);
+             pub.publish(pub_msg);
+
              g_run = false;
            }
 
