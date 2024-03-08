@@ -16,7 +16,7 @@ def publish_json_message():
     # JSONデータを作成
     data = {
         "starts": [[15, 3], [8, 3], [9, 2]],
-        "goal_locations": [[30, 3], [23, 1], [25, 2]]
+        "goal_locations": [[30, 3], [29, 1], [59, 2]]
     }
     
     # JSON形式の文字列に変換
